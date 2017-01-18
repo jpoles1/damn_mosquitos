@@ -1,0 +1,19 @@
+{
+  "name": "damn_mosquitos",
+  "version": "1.0.0",
+  "description": "Mobilizing Citizens to Track Mosquito Populations Edit",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpoles1/damn_mosquitos.git"
+  },
+  "author": "Jordan Poles",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jpoles1/damn_mosquitos/issues"
+  },
+  "homepage": "https://github.com/jpoles1/damn_mosquitos#readme"
+}
