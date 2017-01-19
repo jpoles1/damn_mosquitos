@@ -1,8 +1,27 @@
-<form id="registration_form" action="#">
-  Email: <input v-model="message" placeholder="Email">
-</form>
+<center>
+  <div class="alert alert-danger"></div>
+  <form id="registration_form" action="#">
+    Email: <input v-model="email" placeholder="email">
+    <br><br>
+    Username (Optional): <input v-model="uname" placeholder="username">
+    <br><br>
+    Password: <input v-model="pass" type="password">
+    <br><br>
+    <button v-on:click="submit">Submit</button>
+  </form>
+</center>
 <script type="text/javascript">
+$(function(){
+  console.log("TEST")
   var registration_form = new Vue({
-    el: 'registration_form',
+    el: '#registration_form',
+    data: {email: "", uname: "", pass: ""},
+    methods: {
+      submit: function(){
+        console.log("Test", this)
+        console.log(this.email.val, this.uname, this.pass)
+      }
+    }
   })
+})
 </script>
