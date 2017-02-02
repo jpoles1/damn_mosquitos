@@ -38,6 +38,10 @@ global.api_router = express.Router();
 require("./routers/routers")
 var working_url = process.env.BASE_URL || "";
 app.use(working_url + '/res', express.static('res'));
+if(process.env.DEV_MODE){
+  app.use(working_url + '/data', express.static('data'));
+}
+app.use(working_url + '/res', express.static('res'));
 app.use(working_url + "/api", api_router);
 app.use(working_url, router);
 /*global.dakAPI = require("./logic/dakAPI")

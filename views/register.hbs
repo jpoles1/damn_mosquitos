@@ -25,8 +25,15 @@ $(function(){
             submitted = 1;
             $("#registration_err").slideUp()
             console.log("Submitting form!")
-            $.post("/api/register", function(msg){
+            $.post("/api/register", form_data, function(msg){
               console.log(msg)
+              if(msg.success){
+                alert("Successfully registered for an account!")
+              }
+              else{
+                alert("Failed to register for an account: " + msg.err)
+                submitted = 0;
+              }
             })
           }
         }
