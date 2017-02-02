@@ -4,8 +4,8 @@
   "description": "Mobilizing Citizens to Track Mosquito Populations Edit",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon -i data -V",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "test": "nodemon -i data -V"
   },
   "repository": {
     "type": "git",

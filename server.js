@@ -1,6 +1,14 @@
 require('dotenv').config();
 var fs = require('fs')
 var path = require('path')
+//Create folder structure
+if (!fs.existsSync("data")){
+    fs.mkdirSync("data");
+}
+if (!fs.existsSync("data/logs")){
+    fs.mkdirSync("data/logs");
+}
+//imports
 global.db = require("./logic/db");
 global.express = require("express");
 var morgan = require('morgan');
