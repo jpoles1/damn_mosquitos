@@ -1,5 +1,4 @@
 require('dotenv').config();
-if(!process.env.PORT) throw new Error("Need a valid server port.");
 var fs = require('fs')
 var path = require('path')
 global.db = require("./logic/db");
@@ -14,8 +13,9 @@ var logStream = fs.createWriteStream(path.join(__dirname, 'data/logs/server.log'
 // setup the logger
 app.use(morgan('common', {stream: logStream}))
 //Start listening
-app.listen(process.env.PORT);
-console.log("Listening for HTTP traffic on port:", process.env.PORT)
+var http_port = process.env.PORT || process.env.CUSTOM_PORT || 8080;
+app.listen(http_port);
+console.log("Listening for HTTP traffic on port:", http_port)
 // support json encoded bodies
 app.use(bodyParser.json());
 // support url encoded bodies

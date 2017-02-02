@@ -1,5 +1,5 @@
 <center>
-  <div class="alert alert-danger"></div>
+  <div id="registration_err" class="alert alert-danger" style="display: none;"></div>
   <form id="registration_form" action="#">
     Email: <input v-model="email" placeholder="email">
     <br><br>
@@ -12,14 +12,44 @@
 </center>
 <script type="text/javascript">
 $(function(){
-  console.log("TEST")
+  var submitted = 0;
   var registration_form = new Vue({
     el: '#registration_form',
     data: {email: "", uname: "", pass: ""},
     methods: {
       submit: function(){
-        console.log("Test", this)
-        console.log(this.email.val, this.uname, this.pass)
+        form_data = {email: this.email, username: this.uname, password: this.pass}
+        var valid = this.validate(form_data);
+        if(valid == 1){
+          if(!submitted){
+            submitted = 1;
+            $("#registration_err").slideUp()
+            console.log("Submitting form!")
+            $.post("/api/register", function(msg){
+              console.log(msg)
+            })
+          }
+        }
+        else{
+          $("#registration_err").html(valid)
+          $("#registration_err").slideDown()
+        }
+      },
+      validate: function(form_data){
+        for(key in form_data){
+          var val = form_data[key]
+          if(val == ""){
+            return "The field \"" + key + "\" cannot be blank."
+          }
+        }
+        var email_regex = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+        if(!form_data.email.match(email_regex)){
+          return "Must have a valid email."
+        }
+        if(form_data.password.length < 5){
+          return "Password must contain more than 5 characters."
+        }
+        return 1;
       }
     }
   })
